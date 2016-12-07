@@ -11,14 +11,15 @@ class InvitePerson extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $sender
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $sender)
     {
-        //
+        $this->sender = $sender;
     }
 
     /**
@@ -28,6 +29,10 @@ class InvitePerson extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->from('santa@mysecretsantacla.us')
+                    ->view('emails.invite.inviteperson')
+                    ->with([
+                        'sender_name' => $this->sender->name 
+                        ]);
     }
 }

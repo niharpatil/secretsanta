@@ -6,4 +6,9 @@
 @import "variables";
 
 // Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/materialize-css/sass/materialize.scss";
+@import "node_modules/materialize-css/sass/style.scss";
+@import "node_modules/materialize-css/sass/ghpages-materialize.scss";
+@import "node_modules/materialize-css/sass/forms/_forms.scss";
+
+
