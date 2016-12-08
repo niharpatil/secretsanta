@@ -14,3 +14,5 @@
 Route::get('/', 'FrontendController@home');
 
 Auth::routes();
+
+//Route::get('/register', 'RegistrationController@register');

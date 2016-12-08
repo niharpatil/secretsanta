@@ -14,10 +14,13 @@
        				<a href="#registration" class="breadcrumb">Register</a>
         			<a href="#create_group" class="breadcrumb">Create</a>
         			<a href="#view_group" class="breadcrumb">View</a>
-        			<a href="#idk" class="breadcrumb">Idk</a>
      			</div>
     		</div>
   		</nav>
+	</div>
+	<div class="row">
+		<div class="col s12 center-align"><a href="/login">Returning user?</a>
+</div>
 	</div>
 </div>
 
@@ -41,15 +44,6 @@
 		</div>
 	</div>
 	<div class="col s3" id="view_group" style="margin-top:5%">
-		<div class="container">
-			<div class="row">
-				<div class="container">
-					@include('frontend.filler')
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col s3" id="idk" style="margin-top:5%">
 		<div class="container">
 			<div class="row">
 				<div class="container">
