@@ -1,6 +1,7 @@
-@extends('base.base')
-@section('content')
+@extends('base.frontend.base')
 
+@section('content')
+@parent
 <div class="container" style="position:fixed; padding-left:30%;">
 	<div class="row"  style="position:relative">	
 		<div class="col s12 center-align">
@@ -19,8 +20,7 @@
   		</nav>
 	</div>
 	<div class="row">
-		<div class="col s12 center-align"><a href="/login">Returning user?</a>
-</div>
+		<div class="col s12 center-align"><a href="/login">Returning user?</a></div>
 	</div>
 </div>
 
@@ -29,7 +29,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="container">
-					@include('frontend.registration_form')
+					<register></register>
 				</div>
 			</div>
 		</div>
@@ -38,7 +38,9 @@
 		<div class="container">
 			<div class="row">
 				<div class="container">
-					@include('frontend.filler')
+					@if(Auth::user())
+						<create-group :user-id="{{Auth::user()->id}}"></create-group>
+					@endif
 				</div>
 			</div>
 		</div>
@@ -53,7 +55,4 @@
 		</div>
 	</div>
 </div>
-	
-
-        
 @stop

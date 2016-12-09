@@ -4,31 +4,39 @@
 	<title>SecretSanta</title>
 	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.4/vue.min.js">
 
-   <link rel="stylesheet" type="text/css" href="css/my.css">
+   @yield('css_files')
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <script type="text/javascript">
+       window.Laravel = <?php echo json_encode([
+        'csrfToken' => csrf_token(),
+    ]); ?>
+    </script>
 </head>
-<body id="material-overrides">
-	<canvas id="canvas" style="position:fixed;"></canvas>
+<body>
 
-	@yield('content')
+    <canvas id="canvas" style="position:fixed;"></canvas>
+
+    <div id="app">
+        @yield('content')
+
+    </div>
 
 	<script type="text/javascript" src ="js/jquery-3.1.1.min.js"></script>
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
-  	<script type="text/javascript" src="js/snow.js"></script>
-  	<script type="text/javascript">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+  <script type="text/javascript" src="js/vue.min.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+
+ 	<script type="text/javascript">
         	$(document).ready(function(){
         		Materialize.updateTextFields();
         	});
-        	$(document).ready(function() { 
-        		$("#steps a").bind("click",function(event){ event.preventDefault(); var target = $(this).attr("href"); $("html, body").stop().animate({ scrollLeft: $(target).offset().left, scrollTop: $(target).offset().top }, 1200); }); }); 
         	$(document).ready(function(){
         		//make snowflakes fall
         		setInterval(draw,33);
         	});
-        </script>
+  </script>
+  @yield('scripts')
 </body>
 </html>

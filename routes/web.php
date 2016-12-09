@@ -12,7 +12,16 @@
 */
 
 Route::get('/', 'FrontendController@home');
+Route::get('/call', 'HomeController@return_value');
+Route::get('/manage', 'BackendController@home');
 
 Auth::routes();
 
+Route::get('/register',function(){
+	return redirect('/');
+});
+
+Route::get('/login','FrontendController@login');
+
 //Route::get('/register', 'RegistrationController@register');
+Route::get('/home', 'HomeController@index');

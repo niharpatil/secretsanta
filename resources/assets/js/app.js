@@ -7,6 +7,10 @@
 
 require('./bootstrap');
 
+import * as Vuestrap from 'vue-strap';
+
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the body of the page. From here, you may begin adding components to
@@ -14,7 +18,13 @@ require('./bootstrap');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('create-group', require('./components/forms/CreateGroup.vue'));
+Vue.component('group-cards', require('./components/GroupCards.vue'));
+Vue.component('register',require('./components/forms/Register.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    components: {
+    	alert: Vuestrap.alert
+    }
 });

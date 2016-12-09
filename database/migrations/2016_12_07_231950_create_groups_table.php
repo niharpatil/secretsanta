@@ -17,6 +17,8 @@ class CreateGroupsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->string('group_name');
+            $table->date('locks_on')->nullable();
             $table->timestamps();
         });
     }

@@ -1,4 +1,4 @@
-    <form class="col s12" role="form" method="POST" action"{{ url('/register') }}">
+    <form class="col s12" role="form" method="POST" action="{{ url('/register') }}">
         {{csrf_field()}}
 
       <div class="row">

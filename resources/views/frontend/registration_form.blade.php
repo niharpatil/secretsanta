@@ -3,7 +3,7 @@
 
       <div class="row">
         <div class="input-field col s12 {{ $errors->has('name') ? ' has-error' : '' }}">
-           <input id="name" type="text" class="validate" name="name" value="{{ old('name') }}" required autofocus>
+          <input id="name" type="text" class="validate" name="name" value="{{ old('name') }}" required autofocus>
           <label for="name">Name</label>
            @if ($errors->has('name'))
               <span class="help-block">
