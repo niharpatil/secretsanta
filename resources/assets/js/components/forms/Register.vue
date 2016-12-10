@@ -1,5 +1,5 @@
 <template>
-	    <form class="col s12" role="form" method="POST" @submit.prevent="store">
+	    <form class="col s12" role="form" @submit.prevent="store">
       <div class="row">
         <div class="input-field col s12">
           <input v-model="form.name" id="name" type="text" class="validate" name="name" required autofocus>
@@ -40,23 +40,21 @@
 
 <script>
 	export default {
-		props:{},
 		data(){
-			return{
+			return {
 				form: {
 					name:'',
 					email: '',
 					password:''
 				}
 			}
-
 		},
 		methods:{
 			store(){
-				console.log(this.form);
+				console.log(this.form.email);
 				this.$http.post('/api/create-user',this.form)
 				.then(function(response){
-
+					console.log(response.data);
 				})
 				.catch(function(response){
 

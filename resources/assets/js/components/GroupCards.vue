@@ -1,6 +1,7 @@
 <template>
 <div class="row">
   <ul v-if="groups.length">
+  
   <li v-for="(group,index) in groups">
     <div class="card red lighten-2">
     <div class="card-content white-text">
@@ -31,10 +32,10 @@
     </div>
    </li>
 </ul>
-<div class="col s12">
-  <p class="flow-text">Looks like you have no secret santa groups...Why don't you make one!</p>
-</div>
-
+<ul v-if="!are_groups">
+    <li> <p class="flow-text">Looks like you have no secret santa groups...Why don't you make one!</p>
+</li>
+  </ul>
 </div>
 
 
@@ -48,6 +49,7 @@
     data() {
       return {
         groups:[],
+        are_groups:false
       }
     },
     methods : {
@@ -58,6 +60,9 @@
               'group_name':response.data[i].group_name,
               'members':response.data[i].members
             });
+          if(this.groups.length>0){
+            this.are_groups = true;
+          }
           }
         });
       },

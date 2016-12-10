@@ -21,6 +21,7 @@ Vue.component('example', require('./components/Example.vue'));
 Vue.component('create-group', require('./components/forms/CreateGroup.vue'));
 Vue.component('group-cards', require('./components/GroupCards.vue'));
 Vue.component('register',require('./components/forms/Register.vue'));
+Vue.component('landing',require('./components/Landing.vue'));
 
 const app = new Vue({
     el: '#app',

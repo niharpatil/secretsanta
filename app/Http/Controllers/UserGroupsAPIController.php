@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\User as User;
 use App\Group as Group;
 use App\Member as Member;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserGroupsAPIController extends Controller
 {
@@ -16,17 +19,20 @@ class UserGroupsAPIController extends Controller
     }
 
     public function post_create_user(Request $request){
-    	$this->validate($request[
+    	$this->validate($request, [
     		'name'=>'required',
     		'email'=>'required',
     		'password'=>'required'
-    		]);
+		]);
     	
-    	event(new Registered($user = $this->create($request->all())));
+    	$user = new User;
+    	$user->name = $request->name;
+    	$user->email = $request->email;
+    	$user->password = bcrypt($request->password);
+    	$user->save();
 
     	//fine because API is still stateless
     	Auth::loginUsingId($user->id, true);
-
     }
 
     public function post_create_group_data(Request $request){
