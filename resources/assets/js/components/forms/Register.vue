@@ -51,13 +51,17 @@
 		},
 		methods:{
 			store(){
-				console.log(this.form.email);
 				this.$http.post('/api/create-user',this.form)
 				.then(function(response){
-					console.log(response.data);
+					var msg = response.data;
+					if(msg == "ok"){
+						$("#create_group_anchor")[0].click();
+					} else {
+						console.log(response.data);
+					}
 				})
 				.catch(function(response){
-
+					console.log(response.data);
 				});
 			}
 		},

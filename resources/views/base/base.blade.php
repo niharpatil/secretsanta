@@ -2,9 +2,9 @@
 <html>
 <head>
 	<title>SecretSanta</title>
-	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+	 <link rel="stylesheet" href="css/materialize.css">
    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Lobster|Lobster+Two|Pacifico|Poiret+One" rel="stylesheet">
    @yield('css_files')
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -24,7 +24,7 @@
     </div>
 
 	<script type="text/javascript" src ="js/jquery-3.1.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+  <script src="js/materialize.min.js"></script>
   <script type="text/javascript" src="js/vue.min.js"></script>
   <script type="text/javascript" src="js/app.js"></script>
 

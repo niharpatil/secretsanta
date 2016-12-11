@@ -24,6 +24,12 @@ class UserGroupsAPIController extends Controller
     		'email'=>'required',
     		'password'=>'required'
 		]);
+
+		$user = User::where('email', '=', $request->email)->first();
+		if($user != null){
+			$message = "User with given email already exists";
+			return response()->json($message);
+		}
     	
     	$user = new User;
     	$user->name = $request->name;
@@ -33,6 +39,7 @@ class UserGroupsAPIController extends Controller
 
     	//fine because API is still stateless
     	Auth::loginUsingId($user->id, true);
+    	return response()->json("ok");
     }
 
     public function post_create_group_data(Request $request){

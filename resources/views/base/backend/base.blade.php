@@ -1,13 +1,14 @@
 @extends('base.base')
 
 @section('css_files')
+	<link rel="stylesheet" type="text/css" href="css/backend.css">
 @stop
 
 @section('content')
 <div class="container">
  <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">My Secret Santa</a>
+      <a href="/" class="brand-logo">My Secret Santa</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li class="center"><img src="http://image.fg-a.com/christmas/3-santa-sleigh-reindeer.gif"></li>
       @if(Auth::check())

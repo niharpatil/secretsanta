@@ -16,7 +16,7 @@
 	    	   	<label>How many people are in your group? {{form.group_size}}</label>
 	    	   	<br>
 	    		<p class="range-field" id="range">
-	 			 	<input v-model="form.group_size" @change="show_emails" type="range" id="test5" min="3" max="100" name="groupSize"/>
+	 			 	<input v-model="form.group_size" @change="show_emails" type="range" id="test5" min="2" max="100" name="groupSize"/>
 				</p>
 				<br>
 			 </div>
@@ -57,7 +57,7 @@
 					user_id:'',
 					group_name:'',
 					emails:'',
-					group_size:3
+					group_size:2
 				},
 				email_list: [],
 				size_entered:true,

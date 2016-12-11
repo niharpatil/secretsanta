@@ -1,6 +1,4 @@
 <template>
-	
-
 <div class="row">
 	<div class="col s3" id="registration" style="margin-top:5%">
 		<div class="container">
@@ -49,13 +47,12 @@
 		},
 		methods : {
 			getUser(){
-				this.$http.get('/user'+this.userId).then(function(response){
+				this.$http.get('/user/'+this.userId).then(function(response){
 					this.userId = response.data;
 				});
 			}
 		},
 		mounted : function(){
-
 		}
 	}
 </script>
