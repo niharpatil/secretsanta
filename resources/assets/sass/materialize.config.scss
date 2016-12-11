@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+@import "materialize-src/sass/components/mixins";
+
+// all colors:
+// @import "~materialize-css/sass/components/color";
+
+// BEGIN: only specific colors
+@import "resources/assets/vue-materialize/sass/color";
+// include colors you need
+@include do("include-color","black", "base");
+@include do("include-color","white", "base");
+@import "resources/assets/vue-materialize/sass/colorProcessor";
+// END: only specific colors
+
+@import "materialize-src/sass/components/variables";
+@import "materialize-src/sass/components/normalize";
+@import "materialize-src/sass/components/typography";
+@import "materialize-src/sass/components/global";
+
+// modify variables here
+// all available sass variables:
+// https://github.com/Dogfalo/materialize/blob/master/sass/components/_variables.scss
+// e.g. $dropdown-bg-color: black;
+
+// css only, no JS needed for these
+// activate only what you need
+$roboto-font-path: "materialize-css/fonts/roboto/";
+@import "materialize-src/sass/components/roboto";
+@import "materialize-src/sass/components/icons-material-design"; // icons are no long included in materializeCSS
+@import "materialize-src/sass/components/buttons";
+@import "materialize-src/sass/components/grid";
+@import "materialize-src/sass/components/navbar";
+@import "materialize-src/sass/components/preloader";
+@import "resources/assets/vue-materialize/sass/forms";
+
+// css for js modules
+// activate only what you need
+@import "materialize-src/sass/components/cards";
+@import "materialize-src/sass/components/sideNav";
+@import "materialize-src/sass/components/dropdown";
+@import "materialize-src/sass/components/modal";
+@import "materialize-src/sass/components/collapsible";
+@import "materialize-src/sass/components/table_of_contents"; // scrollspy
+@import "materialize-src/sass/components/forms/input-fields";
+// ----- no js but need to be after input-fields
+@import "materialize-src/sass/components/forms/checkboxes";
+@import "materialize-src/sass/components/forms/radio-buttons";
+// -----
+@import "materialize-src/sass/components/forms/switches";
+@import "materialize-src/sass/components/forms/select"; // need to be after input-fields
+@import "materialize-src/sass/components/toast";
+@import "materialize-src/sass/components/tooltip";
+
+// NOT implemented yet:
+// @import "~materialize-css/sass/components/tabs";
+// @import "~materialize-css/sass/components/slider";
+// @import "~materialize-css/sass/components/date_picker/default";
+// @import "~materialize-css/sass/components/date_picker/default.date";
+// @import "~materialize-css/sass/components/date_picker/default.time";
+// @import "~materialize-css/sass/components/forms/file-input";
+// @import "~materialize-css/sass/components/forms/range";
