@@ -11,6 +11,8 @@ class CreateGroupsTable extends Migration
      *
      * @return void
      */
+
+    //need to implement delete cascading
     public function up()
     {
         Schema::create('groups', function (Blueprint $table) {

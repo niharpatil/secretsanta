@@ -77,4 +77,51 @@ class UserGroupsAPIController extends Controller
     	}
     	return response()->json($groups);
     }
+
+    public function get_form_data_by_group_id(Request $request){
+        $group = Group::find($request->group_id);
+        $members = $group->members()->get()->all();
+        $emails = [];
+        foreach($members as $member){
+            array_push($emails,$member->email);
+        }
+        $group_name = $group->group_name;
+        $return = [
+            'emails' => $emails,
+            'group_name' => $group_name
+        ];
+        return response()->json([$emails,$group_name]);
+    }
+
+
+    
+    //still in the works
+    public function edit_group(Request $request){
+        $emails = explode(",", $request->emails);
+        $group = Group::find($request->group_id);
+        if($group == null){
+            return response()->json("Something went wrong...");
+        }
+        // if($group->owner()->first()->id != $request->user_id){
+        //     return response()->json("invalid owner");
+        // }
+        $group->update(['group_name' => $request->group_name]);
+        Member::where('group_id','=',$group->id)->delete();
+        foreach($emails as $email){
+            if(is_numeric($email) or $email == ""){
+                continue;
+            } else {
+                $member = new Member;
+                $member->name = "";
+                $member->group_id = $group->id;
+                $member->email = $email;
+                $member->confirmed = false;
+                $member->save();
+            }
+        }
+        
+        return response()->json("finished");
+    }
+
+    
 }

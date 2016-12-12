@@ -11,7 +11,7 @@
   <div class="divider"></div>
     <div class="row">
       <div class="col s4">
-        <h3>Your Groups</h3>
+        <h3 style="color:white;">Your Groups</h3>
       </div>
       <div class="col s8">
 

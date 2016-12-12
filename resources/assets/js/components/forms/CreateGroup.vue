@@ -1,6 +1,9 @@
 <template>
 <div class="row">
-	<button @click="toggleToggle" class="waves-effect waves-light btn btn-large"><i class="material-icons right">cloud</i> Make a new secret santa group!</button>
+	<a v-if="edit_group" @click="toggleToggle" class="btn-floating btn-medium red" >
+                              <i class="large material-icons">mode_edit</i>
+      </a>
+	<a v-else @click="toggleToggle" class="waves-effect waves-light btn btn-large"><i class="material-icons right">cloud</i> {{buttonText}}</a>
 	<br>
 	<div class="row">
 		<div class="col s3"></div>
@@ -23,19 +26,22 @@
 	    </div>
 	    <div class="row">
 	    	<ul>
-		   	<p class="flow-text">Group Members' Emails</p>
+		   	<p class="flow-text" style="color:white;">Group Members' Emails</p>
 			   	<li v-for="(item,index) in email_list">
 			   		<div class="row">
 		        	<div class="input-field col s12">
-		          		<input value="" @change="entered(index,$event.target.value)" type="email" class="validate" name="email">
-		          		<label for="email">Email {{index+1}} </label>
+		          		<input :value="item" @change="entered(index,$event.target.value)" type="email" class="validate" name="email">
+		          		<label class="active" for="email">Email {{index+1}} </label>
 		        	</div>
 		      	</div>
 			   	</li>
 	   		</ul>
 	    </div>
 	    <div class="row">
-	    	<button class="btn waves-effect waves-light" type="button" name="store" @click="store">Create Group
+	   		<button v-if="edit_group" class="btn waves-effect waves-light" type="button" name="edit" @click="edit">Edit Group
+    			<i class="material-icons right">send</i>
+  			</button>
+	    	<button v-else class="btn waves-effect waves-light" type="button" name="store" @click="store">Create Group
     			<i class="material-icons right">send</i>
   			</button>
 	    </div>	
@@ -49,7 +55,14 @@
 <script>
 	export default {
 		props:{
-			userId:Number,
+			userId:{
+				type:Number,
+				required: false
+			},
+			groupId:{
+				type: Number,
+				required: false
+			}
 		},
 		data(){
 			return {
@@ -60,9 +73,12 @@
 					group_size:2
 				},
 				email_list: [],
+				email_list_edit: [],
+				edit_group: false,
 				size_entered:true,
 				user_name: '',
 				toggle: false,
+				buttonText: 'Make a new secret santa group!'
 			}
 		},
 		methods : {
@@ -84,15 +100,44 @@
 
 				});
 			},
+			edit(){
+				this.form.emails = this.email_list_edit.toString();
+				this.$http.post('/api/edit-group/'+this.groupId, this.form).then(function(response){
+					console.log(response.data);
+				})
+				.catch(function(response){
+					console.log(response.data);
+				});
+			},
+			getFormData(){
+				this.$http.get('/api/form-data/'+this.groupId).then(function(response){
+					this.email_list_edit = response.data[0];
+					this.email_list = response.data[0];
+					this.form.group_name = response.data[1];
+					this.group_size = this.email_list.length;
+					this.edit_group = true;
+				});
+			},
 			show_emails(){
 				this.email_list = [];
-				for(i = 0; i < this.form.group_size; i++){
+				var count = 0;
+				if(this.email_list_edit.length > 0){
+					for(i = 0; i < this.form.group_size; i++){
+						if(this.email_list_edit[i] != undefined){
+							this.email_list.push(this.email_list_edit[i]);
+							count++;
+						} else {
+							break;
+						}
+					}
+				}
+				for(i = count; i < this.form.group_size; i++){
 					this.email_list.push(i);
 				}
 			},
 			entered(index,value){
 				this.email_list[index] = value;
-				console.log(this.email_list.toString());
+				this.email_list_edit[index] = value;
 			},
 			toggleToggle(){
 				this.toggle = !this.toggle;
@@ -100,6 +145,11 @@
 		},
 		mounted : function(){
 			this.getUser();
+			if(this.groupId){
+				this.getFormData();
+				this.buttonText = "Edit Group";
+			}
+
 		}
 	}
 </script>

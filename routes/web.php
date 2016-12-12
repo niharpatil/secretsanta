@@ -25,3 +25,5 @@ Route::get('/login','FrontendController@login');
 
 //Route::get('/register', 'RegistrationController@register');
 Route::get('/home', 'HomeController@index');
+
+Route::get('/mail-test','BackendController@sendMail');
