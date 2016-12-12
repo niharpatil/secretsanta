@@ -16,11 +16,7 @@
                       <th data-field="name">Name</th>
                       <th data-field="confirmed">Confirmed?</th>
                       <th data-field="email">E-mail</th>
-                      <th>
-                          <a class="btn-floating btn-medium red" href="#modal1">
-                              <i class="large material-icons">mode_edit</i>
-                          </a>
-                      </th>
+                      <th></th>
                   </tr>
                 </thead>
                 <tbody>

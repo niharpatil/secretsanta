@@ -92,4 +92,50 @@ class UserGroupsAPIController extends Controller
         ];
         return response()->json([$emails,$group_name]);
     }
+
+
+    
+    //still in the works
+    public function edit_group(Request $request){
+        $emails = explode(",", $request->emails);
+        $group = Group::find($request->group_id);
+        if($group == null){
+            return response()->json("Something went wrong...");
+        }
+        $group->update(['group_name' => $request->group_name]);
+        $members = $group->members()->get()->all();
+        if(empty($members)){
+            foreach($emails as $email){
+                if(is_numeric($email) or $email == ""){
+                    continue;
+                } else {
+                    $member = new Member;
+                    $member->name = "";
+                    $member->group_id = $group->id;
+                    $member->email = $email;
+                    $member->confirmed = false;
+                    $member->save();
+                }
+            }
+        } else {
+            foreach($members as $member){
+                foreach($emails as $email){
+                if(is_numeric($email) or $member->email == $email or $email == ""){
+                    continue;
+                } else {
+                    $member = new Member;
+                    $member->name = "";
+                    $member->group_id = $group->id;
+                    $member->email = $email;
+                    $member->confirmed = false;
+                    $member->save();
+                }
+        }
+            }
+        }
+        
+        return response()->json("finished");
+    }
+
+    
 }

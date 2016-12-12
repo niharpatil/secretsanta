@@ -18,3 +18,5 @@ Route::post('/create-group','UserGroupsAPIController@post_create_group_data');
 Route::post('/create-user','UserGroupsAPIController@post_create_user');
 Route::post('/distribute','BackendController@distribute');
 Route::get('/form-data/{group_id}','UserGroupsAPIController@get_form_data_by_group_id');
+
+Route::post('/edit-group/{group_id}','UserGroupsAPIController@edit_group');

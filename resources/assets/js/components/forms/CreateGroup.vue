@@ -1,6 +1,9 @@
 <template>
 <div class="row">
-	<button @click="toggleToggle" class="waves-effect waves-light btn btn-large"><i class="material-icons right">cloud</i> {{buttonText}}</button>
+	<a v-if="edit_group" @click="toggleToggle" class="btn-floating btn-medium red" >
+                              <i class="large material-icons">mode_edit</i>
+      </a>
+	<a v-else @click="toggleToggle" class="waves-effect waves-light btn btn-large"><i class="material-icons right">cloud</i> {{buttonText}}</a>
 	<br>
 	<div class="row">
 		<div class="col s3"></div>
@@ -35,7 +38,10 @@
 	   		</ul>
 	    </div>
 	    <div class="row">
-	    	<button class="btn waves-effect waves-light" type="button" name="store" @click="store">Create Group
+	   		<button v-if="edit_group" class="btn waves-effect waves-light" type="button" name="edit" @click="edit">Edit Group
+    			<i class="material-icons right">send</i>
+  			</button>
+	    	<button v-else class="btn waves-effect waves-light" type="button" name="store" @click="store">Create Group
     			<i class="material-icons right">send</i>
   			</button>
 	    </div>	
@@ -68,6 +74,7 @@
 				},
 				email_list: [],
 				email_list_edit: [],
+				edit_group: false,
 				size_entered:true,
 				user_name: '',
 				toggle: false,
@@ -93,12 +100,22 @@
 
 				});
 			},
+			edit(){
+				this.form.emails = this.email_list_edit.toString();
+				this.$http.post('/api/edit-group/'+this.groupId, this.form).then(function(response){
+					console.log(response.data);
+				})
+				.catch(function(response){
+					console.log(response.data);
+				});
+			},
 			getFormData(){
 				this.$http.get('/api/form-data/'+this.groupId).then(function(response){
 					this.email_list_edit = response.data[0];
 					this.email_list = response.data[0];
 					this.form.group_name = response.data[1];
 					this.group_size = this.email_list.length;
+					this.edit_group = true;
 				});
 			},
 			show_emails(){
