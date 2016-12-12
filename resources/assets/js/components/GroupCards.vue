@@ -42,7 +42,7 @@
    </li>
 </ul>
 <ul v-if="!are_groups">
-    <li> <p class="flow-text">Looks like you have no secret santa groups...Why don't you make one!</p>
+    <li> <p style="color:white;" class="flow-text">Looks like you have no secret santa groups...Why don't you make one!</p>
 </li>
   </ul>
 </div>

@@ -23,11 +23,11 @@
 	    </div>
 	    <div class="row">
 	    	<ul>
-		   	<p class="flow-text">Group Members' Emails</p>
+		   	<p class="flow-text" style="color:white;">Group Members' Emails</p>
 			   	<li v-for="(item,index) in email_list">
 			   		<div class="row">
 		        	<div class="input-field col s12">
-		          		<input :placeholder="item" :value="item" @change="entered(index,$event.target.value)" type="email" class="validate" name="email">
+		          		<input :value="item" @change="entered(index,$event.target.value)" type="email" class="validate" name="email">
 		          		<label class="active" for="email">Email {{index+1}} </label>
 		        	</div>
 		      	</div>
@@ -67,6 +67,7 @@
 					group_size:2
 				},
 				email_list: [],
+				email_list_edit: [],
 				size_entered:true,
 				user_name: '',
 				toggle: false,
@@ -94,6 +95,7 @@
 			},
 			getFormData(){
 				this.$http.get('/api/form-data/'+this.groupId).then(function(response){
+					this.email_list_edit = response.data[0];
 					this.email_list = response.data[0];
 					this.form.group_name = response.data[1];
 					this.group_size = this.email_list.length;
@@ -101,12 +103,24 @@
 			},
 			show_emails(){
 				this.email_list = [];
-				for(i = 0; i < this.form.group_size; i++){
+				var count = 0;
+				if(this.email_list_edit.length > 0){
+					for(i = 0; i < this.form.group_size; i++){
+						if(this.email_list_edit[i] != undefined){
+							this.email_list.push(this.email_list_edit[i]);
+							count++;
+						} else {
+							break;
+						}
+					}
+				}
+				for(i = count; i < this.form.group_size; i++){
 					this.email_list.push(i);
 				}
 			},
 			entered(index,value){
 				this.email_list[index] = value;
+				this.email_list_edit[index] = value;
 			},
 			toggleToggle(){
 				this.toggle = !this.toggle;
