@@ -102,35 +102,21 @@ class UserGroupsAPIController extends Controller
         if($group == null){
             return response()->json("Something went wrong...");
         }
+        // if($group->owner()->first()->id != $request->user_id){
+        //     return response()->json("invalid owner");
+        // }
         $group->update(['group_name' => $request->group_name]);
-        $members = $group->members()->get()->all();
-        if(empty($members)){
-            foreach($emails as $email){
-                if(is_numeric($email) or $email == ""){
-                    continue;
-                } else {
-                    $member = new Member;
-                    $member->name = "";
-                    $member->group_id = $group->id;
-                    $member->email = $email;
-                    $member->confirmed = false;
-                    $member->save();
-                }
-            }
-        } else {
-            foreach($members as $member){
-                foreach($emails as $email){
-                if(is_numeric($email) or $member->email == $email or $email == ""){
-                    continue;
-                } else {
-                    $member = new Member;
-                    $member->name = "";
-                    $member->group_id = $group->id;
-                    $member->email = $email;
-                    $member->confirmed = false;
-                    $member->save();
-                }
-        }
+        Member::where('group_id','=',$group->id)->delete();
+        foreach($emails as $email){
+            if(is_numeric($email) or $email == ""){
+                continue;
+            } else {
+                $member = new Member;
+                $member->name = "";
+                $member->group_id = $group->id;
+                $member->email = $email;
+                $member->confirmed = false;
+                $member->save();
             }
         }
         
