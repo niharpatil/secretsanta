@@ -14,5 +14,7 @@ use Illuminate\Http\Request;
 */
 Route::get('/user/{id}', 'UserGroupsAPIController@user');
 Route::get('/group-data/{user_id}','UserGroupsAPIController@get_group_data');
-Route::post('/create-group','UserGroupsApiController@post_create_group_data');
+Route::post('/create-group','UserGroupsAPIController@post_create_group_data');
 Route::post('/create-user','UserGroupsAPIController@post_create_user');
+Route::post('/distribute','BackendController@distribute');
+Route::get('/form-data/{group_id}','UserGroupsAPIController@get_form_data_by_group_id');

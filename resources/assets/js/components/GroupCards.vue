@@ -1,5 +1,6 @@
 <template>
 <div class="row">
+ <!-- Modal Trigger -->
   <ul v-if="groups.length">
   
   <li v-for="(group,index) in groups">
@@ -15,6 +16,11 @@
                       <th data-field="name">Name</th>
                       <th data-field="confirmed">Confirmed?</th>
                       <th data-field="email">E-mail</th>
+                      <th>
+                          <a class="btn-floating btn-medium red" href="#modal1">
+                              <i class="large material-icons">mode_edit</i>
+                          </a>
+                      </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -28,6 +34,9 @@
               </table>
         </div>
       </div>
+    </div>
+    <div class="card-action">
+      <create-group :user-id="this.userId" :group-id="group.id"></create-group>
     </div>
     </div>
    </li>
@@ -56,16 +65,21 @@
       fetchGroupData(){
         this.$http.get('/api/group-data/'+this.userId).then(function(response){
           for(i = 0; i < response.data.length; i++){
+            console.log(response.data[i].id);
             this.groups.push({
               'group_name':response.data[i].group_name,
-              'members':response.data[i].members
+              'members':response.data[i].members,
+              'id':response.data[i].id
             });
-          if(this.groups.length>0){
+          if(this.groups.length > 0){
             this.are_groups = true;
           }
           }
         });
       },
+    },
+    beforeMount:function(){
+
     },
     mounted : function(){
       this.fetchGroupData();

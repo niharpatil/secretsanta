@@ -1,6 +1,6 @@
 <template>
 <div class="row">
-	<button @click="toggleToggle" class="waves-effect waves-light btn btn-large"><i class="material-icons right">cloud</i> Make a new secret santa group!</button>
+	<button @click="toggleToggle" class="waves-effect waves-light btn btn-large"><i class="material-icons right">cloud</i> {{buttonText}}</button>
 	<br>
 	<div class="row">
 		<div class="col s3"></div>
@@ -27,8 +27,8 @@
 			   	<li v-for="(item,index) in email_list">
 			   		<div class="row">
 		        	<div class="input-field col s12">
-		          		<input value="" @change="entered(index,$event.target.value)" type="email" class="validate" name="email">
-		          		<label for="email">Email {{index+1}} </label>
+		          		<input :placeholder="item" :value="item" @change="entered(index,$event.target.value)" type="email" class="validate" name="email">
+		          		<label class="active" for="email">Email {{index+1}} </label>
 		        	</div>
 		      	</div>
 			   	</li>
@@ -49,7 +49,14 @@
 <script>
 	export default {
 		props:{
-			userId:Number,
+			userId:{
+				type:Number,
+				required: false
+			},
+			groupId:{
+				type: Number,
+				required: false
+			}
 		},
 		data(){
 			return {
@@ -63,6 +70,7 @@
 				size_entered:true,
 				user_name: '',
 				toggle: false,
+				buttonText: 'Make a new secret santa group!'
 			}
 		},
 		methods : {
@@ -84,6 +92,13 @@
 
 				});
 			},
+			getFormData(){
+				this.$http.get('/api/form-data/'+this.groupId).then(function(response){
+					this.email_list = response.data[0];
+					this.form.group_name = response.data[1];
+					this.group_size = this.email_list.length;
+				});
+			},
 			show_emails(){
 				this.email_list = [];
 				for(i = 0; i < this.form.group_size; i++){
@@ -92,7 +107,6 @@
 			},
 			entered(index,value){
 				this.email_list[index] = value;
-				console.log(this.email_list.toString());
 			},
 			toggleToggle(){
 				this.toggle = !this.toggle;
@@ -100,6 +114,11 @@
 		},
 		mounted : function(){
 			this.getUser();
+			if(this.groupId){
+				this.getFormData();
+				this.buttonText = "Edit Group";
+			}
+
 		}
 	}
 </script>

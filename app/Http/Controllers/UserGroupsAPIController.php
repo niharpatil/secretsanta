@@ -77,4 +77,19 @@ class UserGroupsAPIController extends Controller
     	}
     	return response()->json($groups);
     }
+
+    public function get_form_data_by_group_id(Request $request){
+        $group = Group::find($request->group_id);
+        $members = $group->members()->get()->all();
+        $emails = [];
+        foreach($members as $member){
+            array_push($emails,$member->email);
+        }
+        $group_name = $group->group_name;
+        $return = [
+            'emails' => $emails,
+            'group_name' => $group_name
+        ];
+        return response()->json([$emails,$group_name]);
+    }
 }
