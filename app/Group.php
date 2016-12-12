@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Group extends Model
 {
@@ -10,7 +11,7 @@ class Group extends Model
     protected $fillable = ['user_id','group_name','locks_on'];
     protected $table = 'groups';
     protected $dates = ['deleted_at'];
-    
+
     public function members(){
     	return $this->hasMany('App\Member');
     }
