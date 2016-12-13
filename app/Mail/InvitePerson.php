@@ -13,7 +13,7 @@ class InvitePerson extends Mailable
     use Queueable, SerializesModels;
 
     public $sender;
-    public $group_name
+    public $group_name;
     public $member;
     /**
      * Create a new message instance.
