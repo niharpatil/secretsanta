@@ -14,7 +14,7 @@ class InviteAPIController extends Controller
     public function send_invite(Request $request){
     	$user = User::find($request->user_id);
         $member = Member::where('confirmation','=',$request->code)->first();
-
+        $group = $member->group()->first();
     	Mail::to($member->email)->send(new InvitePerson($user->name,$group->name,$member));
         var_dump(Mail::failures());
     }
