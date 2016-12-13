@@ -2162,6 +2162,7 @@ html {
  * Remove default margin.
  */
 body {
+  background-color: #0e2851;
   margin: 0;
 }
 

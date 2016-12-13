@@ -5,6 +5,8 @@
 <div class="row">
 	<form class="col s12" method="POST" action="/verify-user">
 			<input class="hidden" value="{{$member->confirmation}}" name="code"></input>
+			<input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+
 			<div class="row">
 				<div class="input-field col s6">
 				  <input placeholder="Placeholder" id="first_name" type="text" class="validate" name="first_name">
