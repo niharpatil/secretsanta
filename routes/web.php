@@ -27,3 +27,7 @@ Route::get('/login','FrontendController@login');
 Route::get('/home', 'HomeController@index');
 
 Route::get('/mail-test','BackendController@sendMail');
+
+Route::get('/registration/verify/{code}','BackendController@verify_user');
+
+Route::post('/verify-user','BackendController@add_member_name');

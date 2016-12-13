@@ -16,7 +16,7 @@
                       <th data-field="name">Name</th>
                       <th data-field="confirmed">Confirmed?</th>
                       <th data-field="email">E-mail</th>
-                      <th></th>
+                      <th>Send Confirmation</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -25,6 +25,11 @@
                     <td v-if="member.confirmed === 1">Yep!</td>
                     <td v-else>Not yet...</td>
                     <td>{{member.email}}</td>
+                    <td>
+                        <a v-if="member.confirmed !== 1" class="waves-effect waves-light btn" name="send_confirm" @click="sendConfirmation(member.confirmation)">
+                         <i class="material-icons right">send</i>
+                        </a>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -73,6 +78,12 @@
           }
         });
       },
+      sendConfirmation(s){
+        console.log(s);
+        this.$http.get('/api/send-invite/'+ this.userId+'/'+s).then(function(response){
+          console.log('confirmation sent');
+        })
+      }
     },
     beforeMount:function(){
 
