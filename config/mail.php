@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'driver' => env('sparkpost'),
+    'driver' => env('MAIL_DRIVER','smtp'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => 'hello@example.com',
-        'name' => 'Example',
+        'address' => 'postmaster@mysecretsantacla.us',
+        'name' => 'Santa',
     ],
 
     /*
