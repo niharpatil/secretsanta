@@ -26,7 +26,7 @@ class BackendController extends Controller
     }
 
     public function verify_user(Request $request){
-        $member = Member::where('confirmation','=',$code)->first();
+        $member = Member::where('confirmation','=',$request->$code)->first();
         if($member==null){
             return response()->json("invalid user code");
         } else {
