@@ -14,6 +14,9 @@ class UserGroupsAPIController extends Controller
 {
 
     public function user(Request $request){
+        if($request->id == 'undefined'){
+            return response()->json("user not found");
+        }
         $user = User::find($request->id);
         return response()->json($user);
     }
@@ -63,6 +66,7 @@ class UserGroupsAPIController extends Controller
     			$member->group_id = $group->id;
     			$member->email = $email;
     			$member->confirmed = false;
+                $member->confirmation = str_random(13);
     			$member->save();
     		}
     	}
@@ -116,6 +120,7 @@ class UserGroupsAPIController extends Controller
                 $member->group_id = $group->id;
                 $member->email = $email;
                 $member->confirmed = false;
+                $member->confirmation = str_random(13);
                 $member->save();
             }
         }
