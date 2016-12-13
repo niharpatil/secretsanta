@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Group as Group;
 use App\User as User;
 use App\Member as Member;
-
+use App\Http\Requests\VerifyUser as VerifyUser;
 
 
 class BackendController extends Controller
@@ -36,13 +36,6 @@ class BackendController extends Controller
         }
     }
 
-    public function add_user_name(VerifyUser $request){
-        $member = Member::where('confirmation','=',$request->code)->first();
-        $member->name = $request->name;
-        $member->confirmed = true;
-        $member->save();
-        return redirect('/');
-    }
 
     
 

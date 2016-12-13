@@ -1,31 +1,10 @@
 <template>
 <div class="row">
-	<div class="col s3" id="registration" style="margin-top:5%">
+	<div class="col s12" id="registration">
 		<div class="container">
 			<div class="row">
 				<div class="container">
 					<register></register>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col s3" id="create_group" style="margin-top:5%">
-		<div class="container">
-			<div class="row">
-				<div v-if="userId" class="container">
-					<create-group :user-id="userId"></create-group>
-				</div>
-				<div v-else class="container">
-					<h1>Filler 1</h1>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col s3" id="view_group" style="margin-top:5%">
-		<div class="container">
-			<div class="row">
-				<div class="container">
-					<h1>Filler</h1>
 				</div>
 			</div>
 		</div>
@@ -42,7 +21,7 @@
 		},
 		data(){
 			return{
-
+				
 			}
 		},
 		methods : {
