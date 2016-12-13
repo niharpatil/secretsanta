@@ -81,6 +81,7 @@
       sendConfirmation(s){
         console.log(s);
         this.$http.get('/api/send-invite/'+ this.userId+'/'+s).then(function(response){
+          Materialize.toast('Confirmation Sent!', 4000);
           console.log('confirmation sent');
         })
       }
