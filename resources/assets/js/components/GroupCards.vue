@@ -6,7 +6,8 @@
         <p style="color:white;">Members that haven't confirmed won't be in your arrangement</p>
       </div>
       <div class="modal-footer">
-        <a @click="distribute" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+        <a @click="close_modal" class="modal-action modal-close waves-effect waves-green btn-flat">Nope, nevermind</a>
+        <a @click="distribute" class=" modal-action modal-close waves-effect waves-green btn-flat">Yeah, let's do it</a>
       </div>
   </div>
 
@@ -103,11 +104,15 @@
         $("#are_you_sure").modal();
       },
       distribute(){
+          $("#are_you_sure").click();
           this.$http.post('/api/distribute/'+this.group_id_to_distribute).then(function(response){
             Materialize.toast(response.data, 4000);
           }).catch(function(response){
             console.log(response.data);
           });
+      },
+      close_modal(){
+        $("#are_you_sure").click();
       }
     },
     beforeMount:function(){
