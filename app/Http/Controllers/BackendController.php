@@ -25,20 +25,6 @@ class BackendController extends Controller
 
     }
 
-    public function verify_user(Request $request){
-        $member = Member::where('confirmation','=',$request->code)->first();
-        if($member==null){
-            return response()->json("invalid user code");
-        } else {
-            return view('backend.verify_user')->with([
-                'member' => $member
-                ]);
-        }
-    }
-
-
-    
-
     // public function distributionLogic(Group $group){
     //     $group = $group;
     //     $members = $group->members()->get()->all();

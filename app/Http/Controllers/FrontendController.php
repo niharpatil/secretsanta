@@ -24,11 +24,22 @@ class FrontendController extends Controller
         return view('frontend.login_form');
     }
 
-      public function add_member_name(VerifyUser $request){
+      public function add_member_name(Request $request){
         $member = Member::where('confirmation','=',$request->code)->first();
         $member->name = $request->name;
         $member->confirmed = true;
         $member->save();
         return redirect()->route('/');
+    }
+
+        public function verify_user(Request $request){
+        $member = Member::where('confirmation','=',$request->code)->first();
+        if($member==null){
+            return response()->json("invalid user code");
+        } else {
+            return view('backend.verify_user')->with([
+                'member' => $member
+                ]);
+        }
     }
 }

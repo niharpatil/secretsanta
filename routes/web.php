@@ -28,4 +28,4 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/registration/verify/{code}','BackendController@verify_user');
 
-Route::post('/verify-user','BackendController@add_member_name');
+Route::post('/verify-user','FrontendController@add_member_name');
