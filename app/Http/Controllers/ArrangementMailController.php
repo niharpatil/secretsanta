@@ -15,9 +15,9 @@ class ArrangementMailController extends Controller
 
     	for($i = 0; $i < sizeof($members); $i++){
     		$member = Member::find($members[$i]);
-    		$assigned = Member::find($assigned[$i]);
+    		$assigned_member = Member::find($assigned[$i]);
     		$group_name = $member->group()->first()->group_name;
-			Mail::to($member)->send(new ShowAssignment($assigned->name, $group_name));
+			Mail::to($member->email)->queue(new ShowAssignment($assigned_member->name, $group_name));
     	}
     }
 }
