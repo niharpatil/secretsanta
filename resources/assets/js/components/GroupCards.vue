@@ -33,11 +33,11 @@
                 <tbody>
                   <tr v-for="member in group.members">
                     <td>{{member.name}}</td>
-                    <td v-if="member.confirmed === 1">Yep!</td>
+                    <td v-if="member.confirmed === true">Yep!</td>
                     <td v-else>Not yet...</td>
                     <td>{{member.email}}</td>
                     <td>
-                        <a v-if="member.confirmed !== 1" class="waves-effect waves-light btn" name="send_confirm" @click="sendConfirmation(member.confirmation)">
+                        <a v-if="member.confirmed !== true" class="waves-effect waves-light btn" name="send_confirm" @click="sendConfirmation(member.confirmation)">
                          <i class="material-icons right">send</i>
                         </a>
                     </td>
