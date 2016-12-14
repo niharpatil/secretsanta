@@ -20,7 +20,7 @@ class ShowAssignment extends Mailable
      */
     public function __construct($assigned_member_name,$group_name)
     {
-        $this->assigned_sender_name = $assigned_member_name;
+        $this->assigned_member_name = $assigned_member_name;
         $this->group_name = $group_name;
     }
 
@@ -31,7 +31,7 @@ class ShowAssignment extends Mailable
      */
     public function build()
     {
-        return $this->view('email.show_assignment')->with([
+        return $this->view('emails.show_assignment')->with([
             'secret_santa_group_name' => $this->group_name,
             'assignment_name' => $this->assigned_member_name
         ]);
