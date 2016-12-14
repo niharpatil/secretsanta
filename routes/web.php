@@ -26,6 +26,6 @@ Route::get('/login','FrontendController@login');
 //Route::get('/register', 'RegistrationController@register');
 Route::get('/home', 'HomeController@index');
 
-Route::get('/registration/verify/{code}','BackendController@verify_user');
+Route::get('/registration/verify/{code}','FrontendController@verify_user');
 
 Route::post('/verify-user','FrontendController@add_member_name');

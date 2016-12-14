@@ -65,7 +65,7 @@
     methods : {
       fetchGroupData(){
         this.$http.get('/api/group-data/'+this.userId).then(function(response){
-          for(i = 0; i < response.data.length; i++){
+          for(var i = 0; i < response.data.length; i++){
             console.log(response.data[i].id);
             this.groups.push({
               'group_name':response.data[i].group_name,
