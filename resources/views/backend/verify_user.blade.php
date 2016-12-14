@@ -4,8 +4,8 @@
 <h3>Join the group by filling in some details!</h3>
 <div class="row">
 	<form class="col s12" method="POST" action="/verify-user">
+				{{csrf_field()}}
 			<input class="hidden" value="{{$member->confirmation}}" name="code"></input>
-			<input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
 
 			<div class="row">
 				<div class="input-field col s6">
