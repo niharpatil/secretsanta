@@ -29,17 +29,23 @@ class FrontendController extends Controller
         $member->name = $request->name;
         $member->confirmed = true;
         $member->save();
-        return redirect()->route('/');
+        return view('frontend.thankyou');
     }
 
-        public function verify_user(Request $request){
+    public function verify_user(Request $request){
+        if(Auth::check()){
+            return view('frontend.mustbeloggedout');
+        }
         $member = Member::where('confirmation','=',$request->code)->first();
         if($member==null){
             return response()->json("invalid user code");
+        } else if ($member->confirmed) {
+            return view('frontend.alreadyconfirmed');
         } else {
             return view('backend.verify_user')->with([
                 'member' => $member
                 ]);
         }
+        
     }
 }

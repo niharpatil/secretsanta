@@ -20,10 +20,10 @@
     		</div>
   		</nav>
 		</div>
-		
+		<div class="row">
+		<div class="col s12 center-align"><p><a style="position: relative;
+z-index: 1;" href="/login">Returning user?</a></p></div>
 	</div>
-	<div class="row">
-		<div class="col s12 center-align"><p><a href="/login">Returning user?</a></p></div>
 	</div>
 </div>
 

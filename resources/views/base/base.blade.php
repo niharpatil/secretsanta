@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>SecretSanta</title>
-	 <link rel="stylesheet" href="css/materialize.css">
+	 <link rel="stylesheet" href="/css/materialize.css">
    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Lobster|Lobster+Two|Pacifico|Poiret+One" rel="stylesheet">
    @yield('css_files')
@@ -23,9 +23,9 @@
 
     </div>
 
-	<script type="text/javascript" src ="js/jquery-3.1.1.min.js"></script>
-  <script src="js/materialize.min.js"></script>
-  <script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src ="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/materialize.min.js"></script>
+  <script type="text/javascript" src="/js/app.js"></script>
 
  	<script type="text/javascript">
         	$(document).ready(function(){

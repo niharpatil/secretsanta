@@ -1,7 +1,7 @@
 @extends('base.base')
 
 @section('css_files')
-	<link rel="stylesheet" type="text/css" href="css/backend.css">
+	<link rel="stylesheet" type="text/css" href="/css/backend.css">
 @stop
 
 @section('content')
@@ -25,5 +25,5 @@
 @stop
 
 @section('scripts')
-	<script type="text/javascript" src="js/snow.js"></script>
+	<script type="text/javascript" src="/js/snow.js"></script>
 @stop
