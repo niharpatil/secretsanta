@@ -17,8 +17,8 @@
     <div class="card-content white-text">
       <span class="card-title">{{group.group_name}}  </span>
       <p v-if="group.arrangements_sent">Arrangements have already been sent!</p>
-      <a v-if="group.arrangements_sent" class="waves-effect waves-light btn" @click="confirmLock(group.id)">Send Again<i class="material-icons right">send</i></a>
-      <a v-else class="waves-effect waves-light btn" @click="confirmLock(group.id)">Send Arrangements<i class="material-icons right">send</i></a>
+      <a v-if="group.arrangements_sent" class="waves-effect waves-teal btn-flat btn" @click="confirmLock(group.id)">Send Again<i class="material-icons right">send</i></a>
+      <a v-else class="waves-effect waves-teal btn-flat btn" @click="confirmLock(group.id)">Send Arrangements<i class="material-icons right">send</i></a>
       <p>When a member confirms their email, their name will show up</p>
       <div class="row">
         <div class="col s12">
