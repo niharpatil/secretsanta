@@ -21,3 +21,4 @@ Route::get('/form-data/{group_id}','UserGroupsAPIController@get_form_data_by_gro
 
 Route::post('/edit-group/{group_id}','UserGroupsAPIController@edit_group');
 Route::get('/send-invite/{user_id}/{code}','InviteAPIController@send_invite');
+Route::post('/distribute/{group_id}','UserGroupsAPIController@distribute');

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User as User;
 use App\Group as Group;
 use App\Member as Member;
+use App\Http\Controllers\ArrangementMailController as ArrangementMailController;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,7 +57,18 @@ class UserGroupsAPIController extends Controller
     	$group = new Group;
     	$group->user_id = $request->user_id;
     	$group->group_name = $request->group_name;
+        $group->arrangements_sent = false;
     	$group->save();
+
+        //create owner as member to reduce confusion
+        $owner = User::find($request->user_id);
+        $member = new Member;
+        $member->name = $owner->name;
+        $member->group_id = $group->id;
+        $member->email = $owner->email;
+        $member->confirmed = true;
+        $member->confirmation = str_random(13);
+        $member->save();
 
     	$emails = explode(",",$request->emails);
     	foreach($emails as $email){
@@ -128,5 +140,41 @@ class UserGroupsAPIController extends Controller
         return response()->json("finished");
     }
 
-    
+    public function distribute(Request $request){
+        $group = Group::find($request->group_id);
+        $members = $group->members()->where('confirmed','=',true)->get()->all();
+        $member_ids = array();
+        foreach($members as $member){
+            array_push($member_ids,$member->id);
+        }
+        if(sizeof($member_ids) <= 2){
+            return response()->json("You need atleast 3 confirmed members in total to play");
+        }
+        $copy = $member_ids;
+        while(true){
+            shuffle($copy);
+            $counter = 0;
+            for($i = 0; $i < sizeof($member_ids); $i++){
+                if($member_ids[$i] == $copy[$i]){
+                    break;
+                } else {
+                    $counter++;
+                }
+            }
+            if ($counter == sizeof($member_ids) and $counter == sizeof($copy)){
+                break;
+            }
+        }
+        $arrangements = [
+            'members' => $copy,
+            'assigned' => $member_ids
+        ];
+        
+        ArrangementMailController::sendArrangements($arrangements);
+        $group->arrangements_sent = true;
+        $group->save();
+        return response()->json("Arrangements sent!");
+    }
+
+
 }

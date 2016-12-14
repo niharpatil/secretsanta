@@ -1,12 +1,23 @@
 <template>
 <div class="row">
- <!-- Modal Trigger -->
+  <div id="are_you_sure" class="modal" style="z-index:10;">
+    <div class="modal-content">
+        <h4 style="color:white;">Are you sure?</h4>
+        <p style="color:white;">Members that haven't confirmed won't be in your arrangement</p>
+      </div>
+      <div class="modal-footer">
+        <a @click="distribute" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+      </div>
+  </div>
+
   <ul v-if="groups.length">
-  
   <li v-for="(group,index) in groups">
     <div class="card red lighten-2">
     <div class="card-content white-text">
-      <span class="card-title">{{group.group_name}}</span>
+      <span class="card-title">{{group.group_name}}  </span>
+      <p v-if="group.arrangements_sent">Arrangements have already been sent!</p>
+      <a v-if="group.arrangements_sent" class="waves-effect waves-light btn" @click="confirmLock(group.id)">Send Again<i class="material-icons right">send</i></a>
+      <a v-else class="waves-effect waves-light btn" @click="confirmLock(group.id)">Send Arrangements<i class="material-icons right">send</i></a>
       <p>When a member confirms their email, their name will show up</p>
       <div class="row">
         <div class="col s12">
@@ -59,7 +70,8 @@
     data() {
       return {
         groups:[],
-        are_groups:false
+        are_groups:false,
+        group_id_to_distribute:Number
       }
     },
     methods : {
@@ -70,7 +82,8 @@
             this.groups.push({
               'group_name':response.data[i].group_name,
               'members':response.data[i].members,
-              'id':response.data[i].id
+              'id':response.data[i].id,
+              'arrangements_sent':response.data[i].arrangements_sent
             });
           if(this.groups.length > 0){
             this.are_groups = true;
@@ -84,6 +97,17 @@
           Materialize.toast('Confirmation Sent!', 4000);
           console.log('confirmation sent');
         })
+      },
+      confirmLock(group_id){
+        this.group_id_to_distribute = group_id;
+        $("#are_you_sure").modal();
+      },
+      distribute(){
+          this.$http.post('/api/distribute/'+this.group_id_to_distribute).then(function(response){
+            Materialize.toast(response.data, 4000);
+          }).catch(function(response){
+            console.log(response.data);
+          });
       }
     },
     beforeMount:function(){

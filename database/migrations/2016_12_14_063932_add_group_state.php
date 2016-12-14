@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddConfirmationColumnToMembers extends Migration
+class AddGroupState extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddConfirmationColumnToMembers extends Migration
      */
     public function up()
     {
-        Schema::table('members', function (Blueprint $table) {
-            $table->string('confirmation')->unique();
+        Schema::table('groups', function (Blueprint $table) {
+            $table->boolean('arrangements_sent');
         });
     }
 
@@ -25,7 +25,7 @@ class AddConfirmationColumnToMembers extends Migration
      */
     public function down()
     {
-        Schema::table('members', function (Blueprint $table) {
+        Schema::table('groups', function (Blueprint $table) {
             //
         });
     }
